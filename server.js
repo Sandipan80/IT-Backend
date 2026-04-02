@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-// require('.dotenv').config();
+require('dotenv').config();
 const Employee = require('./models/Employee.model');
 const routes = require("./routes/index")
 const chief = express();
@@ -21,14 +21,15 @@ chief.use("/getStatus",(req,res,next)=>{
 })
 
 
-mongoose.connect("mongodb+srv://bhullarsandipan_db_user:DE4BE8PAB8Dcj1iH@backend-cluster.ckp0bzp.mongodb.net/")
+mongoose.connect(process.env.Database_url)
 .then(()=>{
-    const PORT = 5000;
+    const PORT = process.env.PORT;
+    console.log(PORT)
     chief.listen(PORT)
     console.log("Connected");
     
 })
-.catch(()=>{
-    console.log("Not Connected");
+.catch((error)=>{
+    console.log("Not Connected",error);
     
 })

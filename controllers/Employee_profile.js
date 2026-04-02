@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 // Logic for fetching the profile
-router.get('/employee_profile/:id', async (req, res) => { // Keep this lowercase
+router.get('/employee_profile/:id', async (req, res) => { 
     try {
         const userId = req.params.id;
         const employeeData = await Employee.findById(userId);
@@ -17,5 +17,4 @@ router.get('/employee_profile/:id', async (req, res) => { // Keep this lowercase
     }
 });
 
-// IMPORTANT: Export the 'router' itself, not just the function
 module.exports = router;

@@ -1,10 +1,15 @@
 const Waiter = require("express").Router()
-const newasset = require("../../controllers/NewAsset");
-const getasset = require("../../controllers/GetAsset")
-const addasset = require("../../controllers/AddAsset")
 
-Waiter.post("/newasset",newasset)
+const addasset = require("../../controllers/AddAsset")
+const { GetAllAssets, GetAssetById } = require("../../controllers/GetAsset")
+const { UpdateAsset, DeleteAsset } = require("../../controllers/NewAsset");
+
+ 
+
 Waiter.post("/addasset",addasset)
-Waiter.get("/getasset",getasset)
+Waiter.get("/GetAllAssets",GetAllAssets)
+Waiter.get("/GetAssetById/:id",GetAssetById)
+Waiter.put("/UpdateAsset/:id",UpdateAsset)
+Waiter.delete("/DeleteAsset/:id",DeleteAsset);
 
 module.exports =Waiter;

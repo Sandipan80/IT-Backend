@@ -6,6 +6,11 @@ const EmployeeSchema = new mongoose.Schema({
   Email:{type:String,required: true},
   Department: { type: String,required: false  },
   Role: { type: String, required: false },
+  role: { 
+    type: String, 
+    enum: ['admin', 'employee'], // Restricts to your Radio Group values
+    default: 'employee' 
+  },
   Assets: { type: String, required: false },// Array of strings like ["Laptop", "Monitor"]
 //   assetsCount: { type: Number, default: 0 },
 //   activeTickets: { type: Number, default: 0 }

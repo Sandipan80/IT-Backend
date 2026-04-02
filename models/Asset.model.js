@@ -1,43 +1,47 @@
-const mongoose =require('mongoose');
+// models/Asset.model.js
 
-const assetschema = new mongoose.Schema({
+const mongoose = require("mongoose");
+
+const AssetSchema = new mongoose.Schema(
+  {
+    assetId: {
+      type:   String,
+      unique: true,
+      index:  true,
+    },
     name: {
-    type: String,
-    required: [true, 'Please provide the asset name'],
-    trim: true
+      type:     String,
+      required: [true, "Asset name is required"],
+      trim:     true,
+    },
+    category: {
+      type:     String,
+      required: [true, "Category is required"],
+      enum:     ["Hardware", "Software", "Furniture", "Vehicle", "Other"],
+    },
+    condition: {
+      type:    String,
+      enum:    ["Excellent", "Good", "Fair", "Poor"],
+      default: "Good",
+    },
+    brand:        { type: String, default: "" },
+    model:        { type: String, default: "" },
+    serialNumber: { type: String, default: "" },
+    purchaseDate: { type: String, default: "" },
+    value:        { type: Number, default: 0 },
+    status: {
+      type:    String,
+      enum:    ["Unassigned", "Assigned", "In Maintenance", "Retired"],
+      default: "Unassigned",
+    },
+    assignedTo: { type: String, default: null },
+    notes:      { type: String, default: "" },
   },
-  
-  category: {
-    type: String,
-    required: [true, 'Please specify a category'],
-    enum: ['Laptop', 'Mouse', 'Keyboard', 'Table', 'Chair', 'Monitor', 'Other']
-  },
-  
-  serialNumber: {
-    type: String,
-    unique: true,
-    sparse: true // Allows multiple nulls if SN isn't available yet
-  },
-  // The core logic for your Inventory
-  status: {
-    type: String,
-    enum: ['Available', 'Assigned', 'Maintenance', 'Retired'],
-    default: 'Available'
-  },
-  // Link to the Employee (Reference to Employee Model)
-  assignedTo: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Employee', // This must match your Employee model name
-    default: null
-  },
-  // Date tracking
-//   purchaseDate: {
-//     type: Date
-//   },
-//   createdAt: {
-//     type: Date,
-//     default: Date.now
-//   }
-});
+  {
+    timestamps: true,
+  }
+);
 
-module.exports = mongoose.model('assetschema',assetschema);
+// NO pre-save hook — assetId is generated in the controller
+
+module.exports = mongoose.model("Asset", AssetSchema);
