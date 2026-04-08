@@ -1,7 +1,7 @@
 const Waiter = require("express").Router()
-const GetUser = require("../../controllers/GetEmployee")
-const NewUser = require("../../controllers/NewEmployee")
-const Employee_profile = require("../../controllers/Employee_profile")
+const GetUser = require("../../controllers/fetch/GetEmployee")
+const NewUser = require("../../controllers/create/NewEmployee")
+const Employee_profile = require("../../controllers/fetch/Employee_profile")
 
 
 Waiter.post("/NewUser",NewUser)

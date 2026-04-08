@@ -1,8 +1,8 @@
 const Waiter = require("express").Router()
 
-const addasset = require("../../controllers/AddAsset")
-const { GetAllAssets, GetAssetById } = require("../../controllers/GetAsset")
-const { UpdateAsset, DeleteAsset } = require("../../controllers/NewAsset");
+const addasset = require("../../controllers/create/AddAsset")
+const { GetAllAssets, GetAssetById } = require("../../controllers/fetch/GetAsset")
+const { UpdateAsset, DeleteAsset } = require("../../controllers/create/NewAsset");
 
  
 
