@@ -1,21 +1,4 @@
-// const TicketSchema = require("../models/Ticket.model")
 
-// const NewTicket = async(req,res,next)=>{
-//     const TicketQueue=(req.body);
-//     console.log("TicketQueue",TicketQueue);
-
-//     const{subject,description,category,priority}=TicketQueue;
-
-//     const saveticket = new TicketSchema({
-//         subject:subject,
-//         description,
-//         category,
-//         priority,
-//     })
-//     await saveticket.save();
-//     res.json({status:"Ticket saved successfully"});
-// };
-// module.exports = NewTicket;
 const TicketSchema = require("../../models/Ticket.model");
 
 const NewTicket = async (req, res, next) => {
