@@ -1,6 +1,6 @@
 // controllers/AddAsset.js
 
-const Asset = require("../models/Asset.model");
+const Asset = require("../../models/Asset.model");
 
 // ─── Generate Asset ID here instead of in the model ──────────────────────────
 function generateAssetId(category) {
