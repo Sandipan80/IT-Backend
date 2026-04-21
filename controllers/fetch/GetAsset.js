@@ -1,6 +1,6 @@
 // controllers/GetAsset.js  (handles GET — fetch all or single)
 
-const Asset = require("../models/Asset.model");
+const Asset = require("../../models/Asset.model");
 
 // GET /api/assets  — return all assets, newest first
 const GetAllAssets = async (req, res) => {
