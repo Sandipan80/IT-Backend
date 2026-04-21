@@ -1,5 +1,5 @@
-const EmployeeSchema = require("../models/Employee.model")
-const {userValidate}= require("../validation/User_Validation");
+const EmployeeSchema = require("../../models/Employee.model")
+const {userValidate}= require("../../validation/User_Validation");
 
 const  GetUser =async(req,res,next)=>{
 //
