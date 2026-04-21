@@ -1,6 +1,6 @@
 // controllers/NewAsset.js  (handles PUT — update, DELETE — remove)
 
-const Asset = require("../models/Asset.model");
+const Asset = require("../../models/Asset.model");
 
 // PUT /api/assets/:id  — update an existing asset by MongoDB _id
 const UpdateAsset = async (req, res) => {
