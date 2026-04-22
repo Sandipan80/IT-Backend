@@ -1,7 +1,6 @@
 // models/Asset.model.js
 
 const mongoose = require("mongoose");
-
 const AssetSchema = new mongoose.Schema(
   {
     assetId: {
@@ -34,8 +33,11 @@ const AssetSchema = new mongoose.Schema(
       enum:    ["Unassigned", "Assigned", "In Maintenance", "Retired"],
       default: "Unassigned",
     },
-    assignedTo: { type: String, default: null },
-    notes:      { type: String, default: "" },
+assignedTo: { 
+  type: mongoose.Schema.Types.ObjectId, 
+  ref: 'EmployeeSchema', // Must match the name in your Employee model export
+  default: null 
+},    notes:      { type: String, default: "" },
   },
   {
     timestamps: true,
