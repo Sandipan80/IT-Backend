@@ -13,9 +13,10 @@ const EmployeeSchema = new mongoose.Schema({
     enum: ['admin', 'employee'], // Restricts to your Radio Group values
     default: 'employee' 
   },
-  Assets: { type: String, required: false },// Array of strings like ["Laptop", "Monitor"]
-//   assetsCount: { type: Number, default: 0 },
-//   activeTickets: { type: Number, default: 0 }
+Assets: [{ 
+  type: mongoose.Schema.Types.ObjectId, 
+  ref: 'Asset' // Must match the name in your Asset model export
+}],
 });
 
 module.exports = mongoose.model('EmployeeSchema', EmployeeSchema);
