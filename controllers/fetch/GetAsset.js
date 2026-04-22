@@ -1,15 +1,18 @@
-// controllers/GetAsset.js  (handles GET — fetch all or single)
-
+// // controllers/GetAsset.js  (handles GET — fetch all or single)
 const Asset = require("../../models/Asset.model");
 
-// GET /api/assets  — return all assets, newest first
+// GET /api/assets — Now with Employee details
 const GetAllAssets = async (req, res) => {
   try {
-    const assets = await Asset.find().sort({ createdAt: -1 });
+    // .populate('assignedTo') looks at the ID in assignedTo and fetches the Employee document
+    const assets = await Asset.find()
+      .populate("assignedTo", "Name Email EmployeeCode") // Only grab specific fields we need
+      .sort({ createdAt: -1 });
+
     return res.status(200).json({
       success: true,
-      count:   assets.length,
-      data:    assets,
+      count: assets.length,
+      data: assets,
     });
   } catch (error) {
     console.error("GetAllAssets error:", error);
@@ -17,18 +20,16 @@ const GetAllAssets = async (req, res) => {
   }
 };
 
-// GET /api/assets/:id  — return single asset by MongoDB _id or assetId
 const GetAssetById = async (req, res) => {
   try {
     const { id } = req.params;
-
-    // Try MongoDB ObjectId first, fall back to custom assetId field
     let asset = null;
+
     if (id.match(/^[0-9a-fA-F]{24}$/)) {
-      asset = await Asset.findById(id);
+      asset = await Asset.findById(id).populate("assignedTo");
     }
     if (!asset) {
-      asset = await Asset.findOne({ assetId: id });
+      asset = await Asset.findOne({ assetId: id }).populate("assignedTo");
     }
 
     if (!asset) {
@@ -43,3 +44,5 @@ const GetAssetById = async (req, res) => {
 };
 
 module.exports = { GetAllAssets, GetAssetById };
+
+
