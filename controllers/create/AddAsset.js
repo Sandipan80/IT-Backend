@@ -1,23 +1,20 @@
-// controllers/AddAsset.js
-
 const Asset = require("../../models/Asset.model");
+const Employee = require("../../models/Employee.model") // MUST import this to update user records
 
-// ─── Generate Asset ID here instead of in the model ──────────────────────────
 function generateAssetId(category) {
   const prefix = {
-    Hardware:  "HW",
-    Software:  "SW",
+    Hardware: "HW",
+    Software: "SW",
     Furniture: "FN",
-    Vehicle:   "VH",
-    Other:     "OT",
+    Vehicle: "VH",
+    Other: "OT",
   }[category] || "AS";
 
   const timestamp = Date.now().toString(36).toUpperCase();
-  const random    = Math.random().toString(36).substring(2, 5).toUpperCase();
+  const random = Math.random().toString(36).substring(2, 5).toUpperCase();
   return `${prefix}-${timestamp}-${random}`;
 }
 
-// ─── Controller — only (req, res), never add `next` ──────────────────────────
 const AddAsset = async (req, res) => {
   try {
     const {
@@ -32,9 +29,9 @@ const AddAsset = async (req, res) => {
       });
     }
 
-    // Generate the ID here — no pre-save hook needed
     const assetId = generateAssetId(category);
 
+    // 1. Create the new Asset document
     const asset = new Asset({
       assetId,
       name,
@@ -45,17 +42,27 @@ const AddAsset = async (req, res) => {
       serialNumber,
       purchaseDate,
       value,
-      status,
-      assignedTo: status === "Assigned" ? assignedTo : null,
+      // If assignedTo is provided, force status to "Assigned"
+      status: assignedTo ? "Assigned" : (status || "Unassigned"),
+      assignedTo: assignedTo || null,
       notes,
     });
 
-    const saved = await asset.save();
+    const savedAsset = await asset.save();
+
+    // 2. LOGIC UPDATE: If an employee was selected during creation, update their record
+    if (assignedTo) {
+      await Employee.findByIdAndUpdate(
+        assignedTo, 
+        { $push: { Assets: savedAsset._id } }, // Push the Mongoose _id into the Employee's Assets array
+        { new: true }
+      );
+    }
 
     return res.status(201).json({
       success: true,
-      message: `Asset created successfully with ID: ${saved.assetId}`,
-      data:    saved,
+      message: `Asset created and ${assignedTo ? 'assigned' : 'saved'} successfully. ID: ${savedAsset.assetId}`,
+      data: savedAsset,
     });
 
   } catch (error) {
@@ -72,3 +79,7 @@ const AddAsset = async (req, res) => {
 };
 
 module.exports = AddAsset;
+
+
+
+
