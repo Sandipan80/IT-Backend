@@ -20,11 +20,15 @@ const Login = async (req, res) => {
 
     // 3. Create a JWT Token
     // The 'secret_key' should ideally be in your .env file
-    const token = jwt.sign(
-      { id: user._id, Email: user.Email },
-      process.env.JWT_SECRET || "bhullar123456789",
-      { expiresIn: "2h" }
-    );
+const token = jwt.sign(
+  { 
+    id: user._id, 
+    Email: user.Email, 
+    role: user.role // CRITICAL: Add this line
+  },
+  process.env.JWT_SECRET || "bhullar123456789",
+  { expiresIn: "2h" }
+);
 
     // 4. Send success response with the token
     res.status(200).json({
