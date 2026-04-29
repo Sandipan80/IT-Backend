@@ -9,7 +9,7 @@ chief.use(express.json());
 
 chief.use(cors({
     origin:["http://localhost:5173"],
-    methods:["GET","POST","PUT","DELETE"],
+    methods:["GET","POST","PUT","DELETE","PATCH"],
 }));
 chief.use("/",routes)
 chief.use("/getStatus",(req,res,next)=>{
