@@ -14,6 +14,8 @@ chief.use(express.json());
 chief.use(cors({
     origin:["http://localhost:5173"],
     methods:["GET","POST","PUT","DELETE","PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"], // Explicitly allow the Auth header
+    credentials: true
 }));
 
 chief.use("/",routes)
