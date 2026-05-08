@@ -12,7 +12,7 @@ const server = http.createServer(chief);
 
 chief.use(express.json());
 chief.use(cors({
-    origin:["http://localhost:5173"],
+    origin:["http://localhost:5173","vault-mu-eight.vercel.app"],
     methods:["GET","POST","PUT","DELETE","PATCH"],
     allowedHeaders: ["Content-Type", "Authorization"], // Explicitly allow the Auth header
     credentials: true
@@ -30,7 +30,7 @@ chief.use("/getStatus",(req,res,next)=>{
 
 const io = new Server(server,{
     cors:{
-        origin :["http://localhost:5173"],
+        origin :["http://localhost:5173","vault-mu-eight.vercel.app"],
         methods : ["GET","POST"],
         credentials: true // Add this for handshake stability
     },
