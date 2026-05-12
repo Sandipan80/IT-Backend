@@ -15,7 +15,7 @@ const EmployeeSchema = new mongoose.Schema({
   },
 Assets: [{ 
   type: mongoose.Schema.Types.ObjectId, 
-  ref: 'Asset' // Must match the name in your Asset model export
+  ref: 'Asset' 
 }],
 });
 
