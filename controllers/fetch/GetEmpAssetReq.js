@@ -6,7 +6,7 @@ const getEmployeeRequests = async (req, res) => {
     const { id } = req.params; // Grabs the ID from the URL
 
     const requests = await AssetRequest.find({ requester: id })
-      .populate("asset", "name category") // Populate asset details (adjust fields as per your schema)
+      .populate("asset", "requester","status",) // Populate asset details (adjust fields as per your schema)
       .sort({ createdAt: -1 }); // Newest first
 
     res.status(200).json({
