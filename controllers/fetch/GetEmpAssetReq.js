@@ -1,4 +1,5 @@
 // controllers/fetch/GetEmpAssetReq.js
+const AssetRequest = require("../../models/AssetRequest.model");
 
 const getEmployeeRequests = async (req, res) => {
   try {
