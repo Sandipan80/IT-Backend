@@ -19,4 +19,5 @@ const getEmployeeRequests = async (req, res) => {
   }
 };
 
-module.exports = { getEmployeeRequests, getAllRequests /* your other exports */ };
+// At the end of GetEmpAssetReq.js
+module.exports = { getEmployeeRequests };

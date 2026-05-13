@@ -24,7 +24,8 @@ Waiter.post("/createAssetRequest",verifyToken,createAssetRequest)
 Waiter.get("/getAllAssetRequests",verifyToken,isAdmin,getAllAssetRequests)
 Waiter.patch("/updateAssetRequest/:requestID",verifyToken,isAdmin,updateAssetRequest)
 Waiter.get("/GetUnassignedAssets",GetUnassignedAssets)
-Waiter.get("/GetEmployeeRequests/:id",verifyToken,GetEmpAssetReq.getEmployeeRequests)
+// Waiter.get("/GetEmpAssetReq/:id",verifyToken,GetEmpAssetReq)
+Waiter.get("/GetEmpAssetReq/:id",verifyToken,GetEmpAssetReq.getEmployeeRequests)    
 
 
 
