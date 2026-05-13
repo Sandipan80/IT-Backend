@@ -8,6 +8,7 @@ const createAssetRequest = require("../../controllers/create/AssetRequest")
 const updateAssetRequest = require("../../controllers/update/UpdateAssetRequest")
 const getAllAssetRequests = require("../../controllers/fetch/GetAssetRequest")
 const GetUnassignedAssets = require("../../controllers/fetch/GetUnassignedAssets")
+const GetEmpAssetReq = require("../../controllers/fetch/GetEmpAssetReq")
 
 const {verifyToken,isAdmin}= require("../../middleware/auth")
 
@@ -23,6 +24,7 @@ Waiter.post("/createAssetRequest",verifyToken,createAssetRequest)
 Waiter.get("/getAllAssetRequests",verifyToken,isAdmin,getAllAssetRequests)
 Waiter.patch("/updateAssetRequest/:requestID",verifyToken,isAdmin,updateAssetRequest)
 Waiter.get("/GetUnassignedAssets",GetUnassignedAssets)
+Waiter.get("/GetEmployeeRequests/:id",verifyToken,GetEmpAssetReq.getEmployeeRequests)
 
 
 
