@@ -5,7 +5,7 @@ Waiter.use("/api",apiRoutes)
 
 
 Waiter.use("/api",(req,res,next)=>{
-    res.json({status:"API route no found"})
+    res.json({status:"API route not found"})
 })
 
 module.exports = Waiter;
