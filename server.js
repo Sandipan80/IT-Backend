@@ -5,6 +5,8 @@ const http = require('http');
 const { Server } = require('socket.io')
 require('dotenv').config();
 const Employee = require('./models/Employee.model');
+const Work = require('./models/Work.model');
+const TicketSchema = require('./models/Ticket.model');
 const routes = require("./routes/index")
 const chief = express();
 const server = http.createServer(chief);
