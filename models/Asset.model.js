@@ -4,44 +4,49 @@ const mongoose = require("mongoose");
 const AssetSchema = new mongoose.Schema(
   {
     assetId: {
-      type:   String,
+      type: String,
       unique: true,
-      index:  true,
+      index: true,
     },
     name: {
-      type:     String,
+      type: String,
       required: [true, "Asset name is required"],
-      trim:     true,
+      trim: true,
     },
     category: {
-      type:     String,
+      type: String,
       required: [true, "Category is required"],
-      enum:     ["Hardware", "Software", "Furniture", "Vehicle", "Other"],
+      enum: ["Hardware", "Software", "Furniture", "Vehicle", "Other"],
     },
     condition: {
-      type:    String,
-      enum:    ["Excellent", "Good", "Fair", "Poor"],
+      type: String,
+      enum: ["Excellent", "Good", "Fair", "Poor"],
       default: "Good",
     },
-    brand:        { type: String, default: "" },
-    model:        { type: String, default: "" },
+    brand: { type: String, default: "" },
+    model: { type: String, default: "" },
     serialNumber: { type: String, default: "" },
     purchaseDate: { type: String, default: "" },
-    value:        { type: Number, default: 0 },
+    value: { type: Number, default: 0 },
     status: {
-      type:    String,
-      enum:    ["Unassigned", "Assigned", "In Maintenance", "Retired"],
+      type: String,
+      enum: ["Unassigned", "Assigned", "In Maintenance", "Retired"],
       default: "Unassigned",
     },
-assignedTo: { 
-  type: mongoose.Schema.Types.ObjectId, 
-  ref: 'EmployeeSchema', // Must match the name in your Employee model export
-  default: null 
-},    notes:      { type: String, default: "" },
+    assignedTo: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "EmployeeSchema", // Must match the name in your Employee model export
+      default: null,
+    },
+    assignedToName: {
+      type: String,
+      default: null,
+    },
+    notes: { type: String, default: "" },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 // NO pre-save hook — assetId is generated in the controller
